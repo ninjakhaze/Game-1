@@ -1,0 +1,79 @@
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+body
+{
+    width: 90%;
+    margin: 0 auto;
+  
+}
+#content
+{
+    overflow: auto;
+    
+}
+#nav, #feature, #footer
+{
+    margin-top: 15px;
+    padding: 10px 0px 5px 0px;
+}
+
+li
+{
+    display: inline;
+    padding: 120px;
+}
+#nav, #footer
+{
+    background-color: #efefef;
+    padding: 0.5em 0;
+    opacity: 0.9;
+}
+#feature
+{
+    height: auto;
+    margin-bottom: 1em;
+    background-color: #efefef;
+}
+*
+{
+    font-family: arial, verdana, sans-serif;
+    color: #665544;
+    text-align: center;
+}
+#feature
+{
+    text-align: match-parent;
+    font-family: bell mt;
+}
+a
+{
+    text-decoration: none;
+}
+h2
+{
+    font-family: Rage Italic, bold;
+    color: #6F7285;
+}
+h3
+{
+    font-family: Algerian;
+    font-size: x-large;
+   color: #5F9F9F; 
+}
+line
+{
+    font-family: bold;
+}
+p
+{
+    font-family: Colonna MT;
+    font-size: large;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+#script
+{
+	position: bottom;
+}
