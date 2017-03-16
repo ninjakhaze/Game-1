@@ -2,12 +2,6 @@ canvas {
     border: 1px solid #d3d3d3;
     background-color: #f1f1f1;
 }
-body
-{
-    width: 90%;
-    margin: 0 auto;
-  
-}
 #content
 {
     overflow: auto;
@@ -15,19 +9,20 @@ body
 }
 #nav, #feature, #footer
 {
-    margin-top: 15px;
+    margin-top: -100px;
+    margin-left: 1320px;
     padding: 10px 0px 5px 0px;
 }
 
 li
 {
     display: inline;
-    padding: 120px;
+    padding: 20px;
 }
 #nav, #footer
 {
     background-color: #efefef;
-    padding: 0.5em 0;
+    
     opacity: 0.9;
 }
 #feature
@@ -73,7 +68,16 @@ p
     margin-left: 2px;
     margin-right: 2px;
 }
-#script
+
+#container
 {
-	position: fixed;
+  height: 0px;
+  position: relative;
+  width: 0px;
+  left: 510px;
+  top: -60px;
+}
+button
+{
+    position: relative;
 }

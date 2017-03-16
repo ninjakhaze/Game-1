@@ -17,6 +17,8 @@ var beatPressed = false;
 var bgmusic;
 var score;
 var s=0;
+var m=0;
+var button;
 
 // STARTGAME FUNCTION(MAIN FUNCTION)
 function startGame() {
@@ -32,6 +34,7 @@ function startGame() {
 	stage = new component2(1020, 279,"Assets/Pictures/stage1stage_only.png ", 0, 0.5, "image");
 	obj   = new component3(1020,1, "black", 0, 280);
         score = new component("30px", "Consolas", "white", 80, 595, "text");
+        button = new component2(20,20, "red", 970, 690);
         myGameArea.start();
 	myGameArea2.start();
 }
@@ -150,7 +153,8 @@ function component2(width, height, color, x, y, type) {
 				this.x, 
 				this.y, 
 				this.width, this.height);
-			} 
+			}
+                        
 			else 
 			{
 				ctx.fillStyle = color;
@@ -202,24 +206,27 @@ function onKeyDown(event)
     switch(event.keyCode)
 	{
             case 65: // a - lane one
-		if (laneOnePressed === false) 
+            {if (laneOnePressed === false) 
                     laneOnePressed = true;
                     beatPressed = false;
                     break;
+                };
             case 83: // s - lane two
-		if (laneTwoPressed === false) 
+            {if (laneTwoPressed === false) 
 			laneTwoPressed = true;
 			beatPressed = false;					
-			break
+			break;
+                    };  
             case 68: // d - lane three
-		if (laneThreePressed === false) 
+            {if (laneThreePressed === false) 
 			laneThreePressed = true;
 			beatPressed = false;					
-			break
+			break;};
             case 32: // space bar - spawn mobs
-		if (spawnMobs === false)
+            {if (spawnMobs === false)
 			spawnMobs = true;
-			break
+			break;
+                        };
 	}
     window.onkeydown = null;
 }
@@ -260,45 +267,47 @@ function updateGameArea() {
 		myGameArea.clear();
 		bg2.newPos();
 		bg2.update();
-		mob.y -= 1.5;
+                button.update();
+		mob.y -= 1;
 		mob.update();
 		mob.newPos();
 		obj.update();//normal
-		mob2.y -= 2;
+                
+		mob2.y -= 1.5;
 		mob2.update();
 		mob2.newPos();
-		obj.update();//fast
-		mob3.y -= 0.8;
+		//fast
+		mob3.y -= 1;
 		mob3.update();
 		mob3.newPos();
-		obj.update();//heavy
+		//heavy
 		stage.update();
 		if (laneOnePressed === true && beatPressed === true)
 			{
                             mob.y = 0;
                             myObstacles.splice(0,1);
-                            s=+50;
+                            s++;
 			}
-			else if (laneTwoPressed === true && beatPressed === true)
+		else if (laneTwoPressed === true && beatPressed === true)
 			{
                             mob2.y = 0;
                             myObstacles.splice(0,1);
-                            s=+100;
+                            s++;
 			}
-			else if (laneThreePressed === true && beatPressed === true)
+		else if (laneThreePressed === true && beatPressed === true)
 			{
                             mob3.y = 0;
                             myObstacles.splice(0,1);
-                            s=+50;
+                            s++;
 			}
-			else if (spawnMobs === true)
+		else if (spawnMobs === true)
 			{
                             mob = new component2(100,100, "blue", 85, 720);
                             mob2  = new component2(100,100, "blue", 400, 720);
                             mob3  = new component2(100,100, "blue", 700, 720);
 			}
-		}
-	}
+            }
+}
 		
 
 // UPDATE GAMEAREA FUNCTION FOR SMALL CANVAS
@@ -334,12 +343,9 @@ function updateGameArea2() {
                     myObstacles.shift();
 		}
 	}
+    score.update();    
     score.text=" " + s;
-    score.update();
 }
-
-
-
 }
 function sound(src){
     this.sound = document.createElement("audio");
@@ -358,4 +364,4 @@ function sound(src){
 function everyinterval(n) {
     if ((myGameArea2.frameNo / n) % 1 === 0) {return true;}
     return false;
-}
+};
