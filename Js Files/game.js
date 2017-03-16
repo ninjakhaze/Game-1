@@ -34,7 +34,7 @@ function startGame() {
 	stage = new component2(1020, 279,"Assets/Pictures/stage1stage_only.png ", 0, 0.5, "image");
 	obj   = new component3(1020,1, "black", 0, 280);
         score = new component("30px", "Consolas", "white", 80, 595, "text");
-        button = new component2(20,20, "red", 970, 690);
+        button = new component4(20,20, "red", 970, 690);
         myGameArea.start();
 	myGameArea2.start();
 }
@@ -46,7 +46,10 @@ var myGameArea = {
         this.canvas.height = 720;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-		this.interval = setInterval(updateGameArea, 20);
+        this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('mousedown', function () {
+            pause();
+        })
 	},
 	clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -183,6 +186,23 @@ function component2(width, height, color, x, y, type) {
 	};
 	
 }
+function component4(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.clicked = function() {
+        pause();
+    }
+}
+
 
 // SIMPLE UNIVERSAL COMPONENT
 function component3(width, height, color, x, y) {
@@ -369,4 +389,6 @@ function everyinterval(n) {
 function pause(){
     myGameArea.stop();
     myGameArea2.stop();
-}
+    bgmusic.stop();
+};
+
