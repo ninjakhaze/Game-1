@@ -19,12 +19,14 @@ var score;
 var s=0;
 var m=0;
 var button;
+var Sound;
 
 // STARTGAME FUNCTION(MAIN FUNCTION)
 function startGame() {
         bgmusic = new sound("Assets/Music/[EDGE OF LIFE]-Just Fly Away.wav");
         bgmusic.play();
-	obj2  = new component (200,15, "black", 0, 450);
+        Sound = new sound("Assets/Music/Game Over.mp3");
+	obj2  = new component (200,2, "black", 0, 450);
 	obj3  = new component (200,1, "black", 0, 515);
 	bg    = new component (200, 720,"Assets/Pictures/ChartLayout.png ", 0, 0, "image");
 	bg2   = new component2(1020, 720,"Assets/Pictures/stage1_floor_only.png ", 0, 0, "image");
@@ -48,8 +50,8 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 20);
         window.addEventListener('mousedown', function () {
-            pause();
-        })
+            
+        });
 	},
 	clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -197,10 +199,10 @@ function component4(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
+    };
     this.clicked = function() {
         pause();
-    }
+    };
 }
 
 
@@ -297,7 +299,7 @@ function updateGameArea() {
 		mob2.update();
 		mob2.newPos();
 		//fast
-		mob3.y -= 0.9;
+		mob3.y -= 1;
 		mob3.update();
 		mob3.newPos();
 		//heavy
@@ -332,10 +334,11 @@ function updateGameArea() {
 
 // UPDATE GAMEAREA FUNCTION FOR SMALL CANVAS
 function updateGameArea2() {
-	var w, h;
 	if (mob.crashWith(obj)|| (mob2.crashWith(obj))||(mob3.crashWith(obj))) {
-        myGameArea.stop();
+        Sound.play();    
         bgmusic.stop();
+        myGameArea.stop();
+        return;
     } 
 	else {
         myGameArea2.clear();
