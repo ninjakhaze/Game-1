@@ -365,3 +365,8 @@ function everyinterval(n) {
     if ((myGameArea2.frameNo / n) % 1 === 0) {return true;}
     return false;
 };
+
+function pause(){
+    myGameArea.stop();
+    myGameArea2.stop();
+}
