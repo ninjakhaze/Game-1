@@ -207,7 +207,7 @@ function updateGameArea()
             if (laneOnePressed === true && beatPressed === true)
 		{
                     mob.y = 0;
-                    notes.pop();
+                    notes.hide();
                     s++;
 		}
             else if (laneTwoPressed === true && beatPressed === true)
