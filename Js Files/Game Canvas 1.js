@@ -200,26 +200,26 @@ function updateGameArea()
             mob2.update();
             mob2.newPos();
             //slow
-            mob3.y -= 1;
+            mob3.y -= 0.8;
             mob3.update();
             mob3.newPos();
             stage.update();
             if (laneOnePressed === true && beatPressed === true)
 		{
                     mob.y = 0;
-                    myObstacles.splice(0,1);
+                    notes.pop();
                     s++;
 		}
             else if (laneTwoPressed === true && beatPressed === true)
 		{
                     mob2.y = 0;
-                    myObstacles.splice(0,1);
+                    notes.pop();
                     s++;
 		}
             else if (laneThreePressed === true && beatPressed === true)
 		{
                     mob3.y = 0;
-                    myObstacles.splice(0,1);
+                    notes.pop();
                     s++;
 		}
             else if (spawnMobs === true)
@@ -262,4 +262,9 @@ function pause()
     myGameArea.stop();
     myGameArea2.stop();
     bgmusic.stop();
+    Sound.stop();
+};
+function keyDown(e){
+    if(e.keyCode === 80)
+        pause();
 };

@@ -105,20 +105,20 @@ function updateGameArea2()
                 {
                     w = myGameArea2.canvas.width;
                     h = myGameArea2.canvas.height - 200;
-                    myObstacles.push(new component(50, 15,"Assets/Pictures/red.png ",80,5, "image"));
+                    notes.push(new component(50, 15,"Assets/Pictures/red.png ",80,5, "image"));
                 }
-            for (i = 0; i < myObstacles.length; i++) 
+            for (i = 0; i < notes.length; i++) 
                 {
-                    myObstacles[i].y += 3;
-                    myObstacles[i].update();
-                    var beat = myObstacles[i];
+                    notes[i].y += 3;
+                    notes[i].update();
+                    var beat = notes[i];
                     if (obj2.x + obj2.width >= beat.x && obj2.x <= beat.x + beat.y && obj2.y >= beat.y && obj2.y <= beat.y + beat.height)
                         {
                             beatPressed = true;
                         }
                     else if (obj3.x + obj3.width >= beat.x && obj3.x <= beat.x + beat.y && obj3.y >= beat.y && obj3.y <= beat.y + beat.height)
                         {
-                            myObstacles.shift();
+                            notes.shift();
                         }
                 }
             score.update();    
