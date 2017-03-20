@@ -8,7 +8,7 @@ var myGameArea =
         this.canvas.height = 720;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
+        this.interval = setInterval(updateGameArea, 100);
     },
     clear : function() 
     {
@@ -118,6 +118,7 @@ window.addEventListener("keyup", onKeyUp);
 
 function onKeyDown(event)
 {
+	event.preventDefault();
     switch(event.keyCode)
 	{
             case 65: // a - lane one
@@ -131,7 +132,7 @@ function onKeyDown(event)
             {
                 if (laneTwoPressed === false) 
 			laneTwoPressed = true;
-			beatPressed = false;					
+			beatPressed = false;				
 			break;
             };  
             case 68: // d - lane three
@@ -176,6 +177,36 @@ function onKeyUp(event)
             }
 	}
 };
+
+function checkInput()
+{
+	       if (laneOnePressed === true && beatPressed === true)
+		{
+                    mob.y = 0;
+                    notes.splice(0,1);
+                    s++;
+					clearInterval(checkInput, -1);
+		}
+            else if (laneTwoPressed === true && beatPressed === true)
+		{
+                    mob2.y = 0;
+                    notes.splice(0,1);
+                    s++;
+		}
+            else if (laneThreePressed === true && beatPressed === true)
+		{
+                    mob3.y = 0;
+                    notes.splice(0,1);
+                    s++;
+		}
+            else if (spawnMobs === true)
+		{
+                    mob = new component2(100,100, "blue", 85, 720);
+                    mob2  = new component2(100,100, "blue", 400, 720);
+                    mob3  = new component2(100,100, "blue", 700, 720);
+		}
+
+}
 // UPDATE GAMEAREA FUNCTION FOR LARGE CANVAS
 function updateGameArea() 
 {
@@ -204,30 +235,9 @@ function updateGameArea()
             mob3.update();
             mob3.newPos();
             stage.update();
-            if (laneOnePressed === true && beatPressed === true)
-		{
-                    mob.y = 0;
-                    notes.pop();
-                    s++;
-		}
-            else if (laneTwoPressed === true && beatPressed === true)
-		{
-                    mob2.y = 0;
-                    notes.pop();
-                    s++;
-		}
-            else if (laneThreePressed === true && beatPressed === true)
-		{
-                    mob3.y = 0;
-                    notes.pop();
-                    s++;
-		}
-            else if (spawnMobs === true)
-		{
-                    mob = new component2(100,100, "blue", 85, 720);
-                    mob2  = new component2(100,100, "blue", 400, 720);
-                    mob3  = new component2(100,100, "blue", 700, 720);
-		}
+			//InputManager.padUpdate();
+			setInterval(checkInput(), 10000);
+			
         }
 };
 		
