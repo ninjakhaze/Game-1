@@ -3,11 +3,21 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" href="CSS/game.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="Assets/font-awesome-4.7.0/css/font-awesome.css">
 </head>
 <body onload="startGame()">
-<div id="script">
-<script src="Js Files/game.js">
-</script>
+    <div id="container">
+<script src="Js Files/VAR DECLARE.js"></script>
+<script src="Js Files/StartGame.js"></script>
+<script src="JS Files/InputManager.js"></script>
+<script src="Js Files/Game Canvas 1.js"></script>
+<script src="Js Files/Game Canvas 2.js"></script>
+
+<menu id="controls">
+    <button type="button" onmousedown="pause()"><i class="fa fa-pause"></i></button>
+  </menu>
 </div>
+    <i class="fa fa-keyboard-o fa-3x"><h1>use A S D keys</h1></i>
 </body>
 </html>
