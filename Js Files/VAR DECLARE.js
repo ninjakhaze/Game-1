@@ -1,7 +1,7 @@
 /// VAR DECLARE
-var mob;
-var mob2;
-var mob3;
+var mob = [];
+var mob2 = [];
+var mob3 = [];
 var obj;
 var obj2;
 var stage;

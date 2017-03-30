@@ -8,9 +8,8 @@ function startGame()
     obj3  = new component (200,1, "black", 0, 515);
     bg    = new component (200, 720,"Assets/Pictures/ChartLayout.png ", 0, 0, "image");
     bg2   = new component2(1020, 720,"Assets/Pictures/stage1_floor_only.png ", 0, 0, "image");
-    mob   = new component2(100,100, "blue", 85, 720);
-    mob2  = new component2(100,100, "blue", 400, 720);
-    mob3  = new component2(100,100, "blue", 700, 720);
+   
+
     stage = new component2(1020, 279,"Assets/Pictures/stage1stage_only.png ", 0, 0.5, "image");
     obj   = new component3(1020,1, "black", 0, 280);
     score = new component("30px", "Consolas", "white", 80, 595, "text");

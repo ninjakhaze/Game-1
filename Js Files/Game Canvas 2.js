@@ -85,15 +85,7 @@ function component(width, height, color, x, y, type)
 
 function updateGameArea2() 
 {
-    if (mob.crashWith(obj)|| (mob2.crashWith(obj))||(mob3.crashWith(obj))) 
-        {
-            Sound.play();    
-            bgmusic.stop();
-            myGameArea.stop();
-            return;
-        } 
-    else 
-        {
+    
             myGameArea2.clear();
             bg.newPos();
             bg.update();
@@ -123,5 +115,5 @@ function updateGameArea2()
                 }
             score.update();    
             score.text=" " + s;
-        }
+        
 };
