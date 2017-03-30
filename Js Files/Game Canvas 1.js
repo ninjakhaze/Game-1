@@ -8,7 +8,7 @@ var myGameArea =
         this.canvas.height = 720;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 100);
+        this.interval = setInterval(updateGameArea, 20);
     },
     clear : function() 
     {
@@ -118,7 +118,6 @@ window.addEventListener("keyup", onKeyUp);
 
 function onKeyDown(event)
 {
-	event.preventDefault();
     switch(event.keyCode)
 	{
             case 65: // a - lane one
@@ -132,7 +131,7 @@ function onKeyDown(event)
             {
                 if (laneTwoPressed === false) 
 			laneTwoPressed = true;
-			beatPressed = false;				
+			beatPressed = false;					
 			break;
             };  
             case 68: // d - lane three
@@ -180,65 +179,67 @@ function onKeyUp(event)
 
 function checkInput()
 {
-	       if (laneOnePressed === true && beatPressed === true)
+	   if (laneOnePressed === true && beatPressed === true)
 		{
-                    mob.y = 0;
-                    notes.splice(0,1);
-                    s++;
-					clearInterval(checkInput, -1);
+            beatPressed = false;
+			mob.splice(0,1);
+            notes.splice(0,1);
+            s++;
 		}
             else if (laneTwoPressed === true && beatPressed === true)
 		{
-                    mob2.y = 0;
-                    notes.splice(0,1);
-                    s++;
+            beatPressed = false;
+			mob2.splice(0,1);
+            notes.splice(0,1);
+            s++;
 		}
             else if (laneThreePressed === true && beatPressed === true)
 		{
-                    mob3.y = 0;
-                    notes.splice(0,1);
-                    s++;
+            beatPressed = false;
+			mob3.splice(0,1);
+            notes.splice(0,1);
+            s++;
 		}
-            else if (spawnMobs === true)
-		{
-                    mob = new component2(100,100, "blue", 85, 720);
-                    mob2  = new component2(100,100, "blue", 400, 720);
-                    mob3  = new component2(100,100, "blue", 700, 720);
-		}
-
 }
 // UPDATE GAMEAREA FUNCTION FOR LARGE CANVAS
 function updateGameArea() 
 {
-    if (mob.crashWith(obj)|| (mob2.crashWith(obj))||(mob3.crashWith(obj))) 
-        {
-            myGameArea.stop();
+    for (i = 0; i < mob.length; i += 1) {
+        if ((mob[i].crashWith(obj))|(mob2[i].crashWith(obj)) || (mob3[i].crashWith(obj))) 
+			{
+				myGameArea.stop();
+				myGameArea2.stop();
+				bgmusic.stop();
+				Sound.play();
+			}
         } 
-    else 
-        {
+    
             myGameArea.clear();
             bg2.newPos();
             bg2.update();
             button.update();
             //normal
-            mob.y -= 1;
-            mob.update();
-            mob.newPos();
-            
             obj.update();
-            //fast    
-            mob2.y -= 1.5;
-            mob2.update();
-            mob2.newPos();
-            //slow
-            mob3.y -= 0.8;
-            mob3.update();
-            mob3.newPos();
             stage.update();
-			//InputManager.padUpdate();
-			setInterval(checkInput(), 10000);
-			
-        }
+			checkInput();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo === 1 || everyinterval(150)) 
+                {
+                    w = myGameArea.canvas.width;
+                    h = myGameArea.canvas.height - 200;
+                    mob.push(new component2(100,100, "blue", 85, 720));
+                    mob2.push(new component2(100,100, "blue", 400, 720));
+                    mob3.push(new component2(100,100, "blue", 700, 720));
+                }
+            for (i = 0; i < mob.length; i++) 
+                {
+                    mob[i].y -= 2;
+                    mob[i].update();
+                    mob2[i].y -= 0.5;
+                    mob2[i].update();
+                    mob3[i].y -=1;
+                    mob3[i].update();
+                }
 };
 		
 
