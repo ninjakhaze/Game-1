@@ -2,7 +2,7 @@ var notes =[];
 var mob = [];
 var mob2 = [];
 var mob3 = [];
-
+var obj;
 function startGame() 
 {
     //Notes = new component(50, 15, "Assets/Pictures/red.png" , 75, 5, "image");
@@ -11,7 +11,7 @@ function startGame()
     stage = new component(1020, 279,"Assets/Pictures/stage1stage_only.png ", 200, 0.5, "image");
     bgmusic = new sound("Assets/Music/[EDGE OF LIFE]-Just Fly Away.wav");
     bgmusic.play();
-    
+    obj  = new component (200,2, "black", 0, 450);
     score = new component("30px", "Consolas", "white", 80, 595, "text");
     myGameArea.start();
 }
@@ -132,6 +132,7 @@ function updateGameArea()
                 notes[i].y += 3;
                 notes[i].update();
             }
+            obj.update();
     score.update();    
     score.text=" " + s;
 }
