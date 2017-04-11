@@ -3,6 +3,11 @@ var mob = [];
 var mob2 = [];
 var mob3 = [];
 var obj;
+var obj3;
+var laneOnePressed = false;
+var laneTwoPressed = false;
+var laneThreePressed = false;
+var beatPressed = false;
 function startGame() 
 {
     //Notes = new component(50, 15, "Assets/Pictures/red.png" , 75, 5, "image");
@@ -12,6 +17,7 @@ function startGame()
     bgmusic = new sound("Assets/Music/[EDGE OF LIFE]-Just Fly Away.wav");
     bgmusic.play();
     obj  = new component (200,2, "black", 0, 450);
+	obj3  = new component (200,2, "black", 0, 515);
     score = new component("30px", "Consolas", "white", 80, 595, "text");
     myGameArea.start();
 }
@@ -83,6 +89,87 @@ function component(width, height, color, x, y, type) {
     }
 }
 
+//CONTROLS
+window.addEventListener("keydown", onKeyDown);
+window.addEventListener("keyup", onKeyUp);
+
+function onKeyDown(event)
+{
+    switch(event.keyCode)
+	{
+            case 65: // a - lane one
+            {
+                if (laneOnePressed === false) 
+                    laneOnePressed = true;
+                    beatPressed = false;
+                    break;
+            };
+            case 83: // s - lane two
+            {
+                if (laneTwoPressed === false) 
+			laneTwoPressed = true;
+			beatPressed = false;					
+			break;
+            };  
+            case 68: // d - lane three
+            {
+                if (laneThreePressed === false) 
+			laneThreePressed = true;
+			beatPressed = false;					
+			break;
+            };
+	}
+    window.onkeydown = null;
+};
+
+function onKeyUp(event)
+{
+    switch(event.keyCode)
+	{
+            case 65:{ // a - lane one
+                laneOnePressed = false;
+                beatPressed = false;
+                break;
+            }
+            case 83:{ // s - lane two
+                laneTwoPressed = false;
+                beatPressed = false;
+                break;
+            }
+            case 68:{ // d - lane three
+                laneThreePressed = false;
+                beatPressed = false;
+                break;
+            }
+	}
+};
+
+function checkInput()
+{
+	   if (laneOnePressed === true && beatPressed === true)
+		{
+            beatPressed = false;
+			mob.splice(0,1);
+            notes.splice(0,1);
+            s++;
+		}
+            else if (laneTwoPressed === true && beatPressed === true)
+		{
+            beatPressed = false;
+			mob2.splice(0,1);
+            notes.splice(0,1);
+            s++;
+		}
+            else if (laneThreePressed === true && beatPressed === true)
+		{
+            beatPressed = false;
+			mob3.splice(0,1);
+            notes.splice(0,1);
+            s++;
+		}
+}
+//END CONTROLS
+
 function updateGameArea() 
 {
     for (i = 0; i < mob.length; i += 1) 
@@ -102,6 +189,10 @@ function updateGameArea()
     bg2.update();
     stage.newPos();
     stage.update();
+	obj3.newPos();
+	obj3.update();
+	obj.update();
+	checkInput();
     myGameArea.frameNo += 1;
         if (myGameArea.frameNo === 1 || everyinterval(150)) 
            {
@@ -131,8 +222,19 @@ function updateGameArea()
            {
                 notes[i].y += 3;
                 notes[i].update();
+				var beat = notes[i];
+					    if (obj.x + obj.width >= beat.x && obj.x <= beat.x + beat.y && obj.y >= beat.y && obj.y <= beat.y + beat.height)
+                        {
+							
+                            beatPressed = true;
+                        }
+                    else if (obj3.x + obj3.width >= beat.x && obj3.x <= beat.x + beat.y && obj3.y >= beat.y && obj3.y <= beat.y + beat.height)
+                        {
+                            notes.shift();
+                        }
+						
             }
-            obj.update();
+         
     score.update();    
     score.text=" " + s;
 }
